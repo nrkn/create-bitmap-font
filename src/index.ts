@@ -1,6 +1,9 @@
 import { createCanvas, GlobalFonts } from '@napi-rs/canvas'
 import { defaultOptions, Options } from './options'
+import { Tuple4 } from './types'
 import { randId } from './util'
+
+export { drawText, drawTextCustom, measureWidth } from './draw-text'
 
 export const createBitmapFont = (
   font: Buffer, fontSize: number, opts: Partial<Options> = {}
@@ -9,29 +12,12 @@ export const createBitmapFont = (
     {}, defaultOptions, opts
   )
 
-  let fillCss = ''
-  let bgCss = ''
-
   // colors
-  {
-    let [rr, rg, rb, ra] = bg
-
-    ra = Math.floor(ra / 255 * 100)
-
-    bgCss = `rgba(${[rr, rg, rb, ra].join()})`
-  }
-
-  {
-    let [fr, fg, fb, fa] = fill
-
-    fa = Math.floor(fa / 255 * 100)
-
-    fillCss = `rgba(${[fr, fg, fb, fa].join()})`
-  }
+  const fillCss = rgbaToCss( fill )
+  const bgCss = rgbaToCss( bg )
 
   // font
   const id = randId()
-
   GlobalFonts.register(font, id)
 
   // measure
@@ -120,10 +106,10 @@ export const createBitmapFont = (
   }
 
   const imageData = ctx.getImageData( 0, 0, totalWidth, height )
-
   const pngBuffer = canvas.toBuffer('image/png')
 
   return { offsets, pngBuffer, imageData, canvas }
 }
 
-export { drawText, drawTextCustom, measureWidth } from './draw-text'
+const rgbaToCss = ( [ r, g, b, a ]: Tuple4 ) => 
+  `rgba(${[r, g, b, Math.floor(a / 255 * 100)].join()})`
