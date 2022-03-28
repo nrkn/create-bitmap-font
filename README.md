@@ -1,6 +1,6 @@
 # create-bitmap-font
  
-Create a bitmap sprite font
+Create a bitmap sprite font in node
 
 `npm install @nrkn/create-bitmap-font`
 
@@ -12,19 +12,24 @@ import { createBitmapFont, drawText } from '@nrkn/create-bitmap-font'
 
 const { readFile, writeFile } = promises
 
+// colors - 4 bytes in rgba order
 const fill = [0xff, 0xc2, 0x0e, 0xff]
 const bg = [ 0, 0, 0, 0 ]
 
 const start = async () => {
+  // let's just use the printable chars from 7-bit ascii
+  // eg [ 33, 34, ...etc ]
   const codes = createSeq(95, i => i + 33)
 
+  // otf or ttf buffer
   const font = await readFile('some-font.otf')
+
   const bitmapFont = createBitmapFont(font, 32, { fill, bg, codes })
 
   const { offsets, pngBuffer } = bitmapFont
 
   // save the bitmap font and the text metrics
-  await writeFile('some-font.png', pngBuffer)
+  await writeFile( 'some-font.png', pngBuffer )
   await writeFile( 'some-font.json', JSON.stringify( offsets, null, 2 ), 'utf8' )
 
   // create text drawing function
@@ -34,10 +39,13 @@ const start = async () => {
 
   const text = codes.map( c => String.fromCharCode( c ) ).join( '' )
 
+  // returns a canvas
   const roundTrip = draw( text )
 
+  // turn it into a PNG
   const roundPng = roundTrip.toBuffer('image/png')
 
+  // should be the same as the pngBuffer created by createBitmapFont
   await writeFile( 'test-round.png', roundPng )
 
   // now write some arbitrary text
@@ -56,6 +64,12 @@ const createSeq = (length, cb) =>
 
 start().catch(console.error)
 ```
+
+## todo
+
+Should be able to use in browser too, especially as we are using a canvas
+compatible module in node - add a factory function that takes deps like canvas
+etc and returns a create bitmap font function
 
 ## license
 
