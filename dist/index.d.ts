@@ -6,3 +6,4 @@ export declare const createBitmapFont: (font: Buffer, fontSize: number, opts?: P
     imageData: ImageData;
     canvas: import("@napi-rs/canvas").Canvas;
 };
+export { drawText, drawTextCustom, measureWidth } from './draw-text';

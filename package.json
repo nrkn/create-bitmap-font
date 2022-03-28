@@ -1,6 +1,6 @@
 {
   "name": "@nrkn/create-bitmap-font",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a bitmap sprite font",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

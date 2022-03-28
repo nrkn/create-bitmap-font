@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createBitmapFont = void 0;
+exports.measureWidth = exports.drawTextCustom = exports.drawText = exports.createBitmapFont = void 0;
 const canvas_1 = require("@napi-rs/canvas");
 const options_1 = require("./options");
 const util_1 = require("./util");
@@ -81,4 +81,8 @@ const createBitmapFont = (font, fontSize, opts = {}) => {
     return { offsets, pngBuffer, imageData, canvas };
 };
 exports.createBitmapFont = createBitmapFont;
+var draw_text_1 = require("./draw-text");
+Object.defineProperty(exports, "drawText", { enumerable: true, get: function () { return draw_text_1.drawText; } });
+Object.defineProperty(exports, "drawTextCustom", { enumerable: true, get: function () { return draw_text_1.drawTextCustom; } });
+Object.defineProperty(exports, "measureWidth", { enumerable: true, get: function () { return draw_text_1.measureWidth; } });
 //# sourceMappingURL=index.js.map

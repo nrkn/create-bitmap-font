@@ -126,4 +126,4 @@ export const createBitmapFont = (
   return { offsets, pngBuffer, imageData, canvas }
 }
 
-export { drawText } from './draw-text'
+export { drawText, drawTextCustom, measureWidth } from './draw-text'
