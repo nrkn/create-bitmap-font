@@ -71,6 +71,10 @@ Should be able to use in browser too, especially as we are using a canvas
 compatible module in node - add a factory function that takes deps like canvas
 etc and returns a create bitmap font function
 
+Using measureText to get the metrics is lazy - we have plenty of code lying 
+around that can get better metrics by parsing the font file, eg proper x 
+advance, kerning etc - but this gets job done for now
+
 ## license
 
 MIT License
