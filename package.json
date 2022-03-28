@@ -1,0 +1,27 @@
+{
+  "name": "@nrkn/create-bitmap-font",
+  "version": "0.1.0",
+  "description": "Create a bitmap sprite font",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrkn/create-bitmap-font.git"
+  },
+  "keywords": [ "font", "sprite", "bitmap" ],
+  "author": "Nik Coughlin <nrkn.com@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nrkn/create-bitmap-font/issues"
+  },
+  "homepage": "https://github.com/nrkn/create-bitmap-font#readme",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.21"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23"
+  }
+}
