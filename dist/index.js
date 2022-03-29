@@ -1,24 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.measureWidth = exports.drawTextCustom = exports.drawText = exports.createBitmapFont = void 0;
+exports.createBitmapFont = exports.measureWidth = exports.drawTextCustom = exports.drawText = void 0;
 const canvas_1 = require("@napi-rs/canvas");
 const options_1 = require("./options");
 const util_1 = require("./util");
+var draw_text_1 = require("./draw-text");
+Object.defineProperty(exports, "drawText", { enumerable: true, get: function () { return draw_text_1.drawText; } });
+Object.defineProperty(exports, "drawTextCustom", { enumerable: true, get: function () { return draw_text_1.drawTextCustom; } });
+Object.defineProperty(exports, "measureWidth", { enumerable: true, get: function () { return draw_text_1.measureWidth; } });
 const createBitmapFont = (font, fontSize, opts = {}) => {
     const { fill, bg, drawGuides, codes } = Object.assign({}, options_1.defaultOptions, opts);
-    let fillCss = '';
-    let bgCss = '';
     // colors
-    {
-        let [rr, rg, rb, ra] = bg;
-        ra = Math.floor(ra / 255 * 100);
-        bgCss = `rgba(${[rr, rg, rb, ra].join()})`;
-    }
-    {
-        let [fr, fg, fb, fa] = fill;
-        fa = Math.floor(fa / 255 * 100);
-        fillCss = `rgba(${[fr, fg, fb, fa].join()})`;
-    }
+    const fillCss = rgbaToCss(fill);
+    const bgCss = rgbaToCss(bg);
     // font
     const id = (0, util_1.randId)();
     canvas_1.GlobalFonts.register(font, id);
@@ -81,8 +75,5 @@ const createBitmapFont = (font, fontSize, opts = {}) => {
     return { offsets, pngBuffer, imageData, canvas };
 };
 exports.createBitmapFont = createBitmapFont;
-var draw_text_1 = require("./draw-text");
-Object.defineProperty(exports, "drawText", { enumerable: true, get: function () { return draw_text_1.drawText; } });
-Object.defineProperty(exports, "drawTextCustom", { enumerable: true, get: function () { return draw_text_1.drawTextCustom; } });
-Object.defineProperty(exports, "measureWidth", { enumerable: true, get: function () { return draw_text_1.measureWidth; } });
+const rgbaToCss = ([r, g, b, a]) => `rgba(${[r, g, b, Math.floor(a / 255 * 100)].join()})`;
 //# sourceMappingURL=index.js.map

@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/nrkn/create-bitmap-font.git"
   },
-  "keywords": [ "font", "sprite", "bitmap" ],
+  "keywords": [
+    "font",
+    "sprite",
+    "bitmap"
+  ],
   "author": "Nik Coughlin <nrkn.com@gmail.com>",
   "license": "MIT",
   "bugs": {
